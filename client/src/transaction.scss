@@ -1,0 +1,131 @@
+.App {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.App-header {
+    background-color: #282c34;
+    padding: 2rem;
+    color: white;
+}
+
+.account-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #f0f0f0;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.account-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: black;
+    /* Set font color to black */
+}
+
+.account-label {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.account-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.transaction-heading {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+.transaction-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.transaction-item {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.walletCard {
+    background-color: #eeeded;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 430px;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .accountDisplay h3,
+  .balanceDisplay h3 {
+    margin: 20px 0;
+    color: #333;
+  }
+  
+  .errorMessage {
+    color: red;
+    margin-top: 15px;
+  }
+  
+  /* Additional Styles */
+  
+  .walletCard {
+    margin-top: 50px;
+  }
+  
+  .accountDisplay h3 {
+    font-size: 18px;
+  }
+  
+  .balanceDisplay h3 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  @media (max-width: 480px) {
+    .walletCard {
+      padding: 20px;
+    }
+  }
+
+  .negative-value{
+    color: red;
+  }
+
+  .positive-value{
+    color: green
+  }
+  

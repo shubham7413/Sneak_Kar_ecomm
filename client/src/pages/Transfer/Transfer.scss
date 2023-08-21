@@ -1,0 +1,54 @@
+.transfer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    background-color: #f2f2f2;
+    padding-top: 50px;
+    // background-image: url('https://i.pinimg.com/564x/38/1f/2e/381f2e24d000c7282aa759030538a445.jpg');
+  }
+  
+  .transfer-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto; /* Center horizontally */
+  }
+  
+  .transfer-form label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .transfer-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border:  1px solid #ccc;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+  }
+  
+  .transfer-button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .transfer-button:hover {
+    background-color: #2980b9;
+  }
+ 
