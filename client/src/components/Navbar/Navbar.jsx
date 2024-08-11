@@ -4,46 +4,92 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link, useNavigate } from "react-router-dom";
-import "./Navbar.scss"
+import Box from "@mui/material/Box";
+import Input from "@mui/material/Input";
+import FilledInput from "@mui/material/FilledInput";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import "./Navbar.scss";
 import Cart from "../Cart/Cart";
 import { useSelector } from "react-redux";
-import { Badge, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Icon, IconButton, Typography } from "@mui/material";
-import { CurrencyBitcoin, Logout } from "@mui/icons-material"
+import {
+  Badge,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Icon,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import { CurrencyBitcoin, Logout } from "@mui/icons-material";
 import useAuth from "../../hooks/useAuth";
 import useToken from "../../hooks/useToken";
-import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false)
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
+  const [open, setOpen] = useState(false);
   const products = useSelector((state) => state.cart.products);
-  const { token, setToken } = useToken()
+  const { token, setToken } = useToken();
   const [dialog, setDialog] = useState(false);
-  const { logOut } = useAuth()
-  const navigate = useNavigate()
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setDialog(false);
-  }
+  };
 
   const handleLogout = async () => {
     await logOut();
-    navigate("/login")
-  }
+    navigate("/login");
+  };
 
   const handleToken = () => {
-    navigate("/transaction")
-  }
+    navigate("/transaction");
+  };
 
   return (
     <div className="navbar">
       <div className="wrapper">
-
+        <img src="/img/walmart_logo.webp" alt="" className="logo" />
         <div className="left">
-          <Link className="link" to="/">Sneak Kar</Link>
+          <Link className="link" to="/">
+            Sneak Kar
+          </Link>
         </div>
 
         <div className="center">
-
+          <TextField
+            id="input-with-icon-textfield"
+            className="search-field"
+            label="Search everything at Sneak Kar online and in store"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            variant="standard"
+          />
         </div>
 
         {/* token area */}
@@ -56,18 +102,24 @@ const Navbar = () => {
             </Badge>
           </div>
 
+          {/* <div className="item">
+            <Link className="link" to="/">
+              Home
+            </Link>
+          </div> */}
           <div className="item">
-            <Link className="link" to="/">Home</Link>
+            <Link className="link" to="/transfer">
+              Transfer
+            </Link>
           </div>
           <div className="item">
-            <Link className="link" to="/transfer">Transfer</Link>
-          </div>
-          <div className="item">
-            <Link className="link" to="/about">About</Link>
+            <Link className="link" to="/about">
+              About
+            </Link>
           </div>
 
           <div className="icons">
-            <SearchIcon />
+            {/* <SearchIcon /> */}
             <PersonOutlineOutlinedIcon />
             <FavoriteBorderOutlinedIcon />
 

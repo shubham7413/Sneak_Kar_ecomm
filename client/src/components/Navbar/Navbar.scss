@@ -1,31 +1,45 @@
 .navbar {
-  height: 80px;
+  // height: 80px;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: white;
+  font-weight: 700;
 
   .wrapper {
     padding: 10px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #0071dc;
 
+    .logo{
+      width: 50px;
+    }
     .item {
       display: flex;
       align-items: center;
-      font-size: 15px;
+      font-size: 1rem;
     }
 
     .left {
       display: flex;
       align-items: center;
       gap: 25px;
-      font-size: 36px;
+      // font-size: 36px;
+      font-size: 2rem;
       letter-spacing: 1px;
-      font-weight: 650;
+      font-weight: 700;
     }
 
     .center {
-      font-size: 30px;
+      font-size: 1rem;
       letter-spacing: 2px;
+      color: white;
+      width: 40%;
+    }
+    .search-field{
+      background: white;
+    border-radius: 2em;
+    width: 100%;
     }
 
     .right {
@@ -36,14 +50,14 @@
       .icons {
         display: flex;
         gap: 15px;
-        color: #777;
+        color: #ffffff;
         cursor: pointer;
 
         .cartIcon {
           position: relative;
 
           span {
-            font-size: 12px;
+            font-size: 1rem;
             width: 20px;
             height: 20px;
             border-radius: 50%;

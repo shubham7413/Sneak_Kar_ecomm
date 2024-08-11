@@ -5,20 +5,21 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Product from "./pages/Product/Product";
 import Products from "./pages/Products/Products";
-import "./app.scss"
+import "./app.scss";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import About from "./pages/AboutUs/about";
 import Transaction from "./transaction";
+import Cart from "./components/Cart/Cart";
 import Transfer from "./pages/Transfer/Transfer";
 import SharePopup from "./pages/share/share";
 
 const Layout = () => {
   return (
     <div className="app">
-      <Navbar/>
-      <Outlet/>
-      <Footer/>
+      <Navbar />
+      <Outlet />
+      <Footer />
     </div>
   );
 };
@@ -26,45 +27,49 @@ const Layout = () => {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout/>,
+    element: <Layout />,
     children: [
       {
         path: "/",
-        element: <Home/>,
+        element: <Home />,
       },
       {
         path: "/products/:id",
-        element: <Products/>,
+        element: <Products />,
       },
       {
         path: "/product/:id",
-        element: <Product/>,
+        element: <Product />,
       },
       {
         path: "/transaction",
-        element: <Transaction/>,
+        element: <Transaction />,
       },
       {
         path: "/transfer",
-        element: <Transfer/>,
+        element: <Transfer />,
       },
       {
         path: "/share",
-        element: <SharePopup/>,
+        element: <SharePopup />,
       },
     ],
   },
   {
     path: "/login",
-    element: <Login/>,
+    element: <Login />,
   },
   {
     path: "/signup",
-    element: <Signup/>,
+    element: <Signup />,
   },
   {
     path: "/about",
-    element: <About/>,
+    element: <About />,
+  },
+  {
+    path: "/cart",
+    element: <Cart />,
   },
 ]);
 

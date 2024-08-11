@@ -1,0 +1,65 @@
+.flex-container {
+    display: flex;
+    height: 80vh;
+    background-color: #f1f1f1;
+    justify-content: space-around;
+  }
+  [class^="col-"]{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 250px;
+  }
+  .col-1{
+    width: 20%;
+  }
+  .col-2{
+    width: 50%;
+  }
+  .col-3{
+    width: 20%;
+  }
+  [class^="deal-"] {
+    border-radius: 1em;
+    background-size: cover;
+    background-position: center bottom;
+    }
+  .deal-1{
+    background-image: url("../../../public/img/deal1.webp");
+    height: 20%;
+  }
+  .deal-2{
+    background-image: url("../../../public/img/deal2.webp");
+    height: 50%;
+  }
+  .deal-3{
+    background-image: url("../../../public/img/deal3.jpg");
+    height: 20%;
+  }
+  .deal-4{
+    background-image: url("../../../public/img/deal4.webp");
+    height: 40%;
+  }
+  .deal-5{
+    background-image: url("../../../public/img/deal4.webp");
+    height: 30%;
+  }
+  .deal-6{
+    background-image: url("../../../public/img/deal6.webp");
+    height: 20%;
+  }
+  .deal-7{
+    background-image: url("../../../public/img/deal7.jpg");
+    height: 20%;
+  }
+  .deal-8{
+    background-image: url("../../../public/img/deal8.webp");
+    height: 30%;
+  }
+  .deal-9{
+    background-image: url("../../../public/img/deal9.webp");
+    height: 40%;
+  }
+//   .deal-1{
+//     background-image: url("../../../public/img/deal1.webp");
+//   }
