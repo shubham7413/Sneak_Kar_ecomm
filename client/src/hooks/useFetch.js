@@ -1,24 +1,29 @@
 import { useEffect, useState } from "react";
-import { makeRequest } from "../makeRequest";
+import { supabase } from "../config/supabaseClient";
 
-const useFetch = (url) => {
+const useFetch = (tableName, columns = '*') => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await makeRequest.get(url);
-        setData(res.data.data);
+        const { data, error } = await supabase
+          .from(tableName)
+          .select(columns);
+
+        if (error) throw error;
+        setData(data);
       } catch (err) {
-        setError(true);
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     fetchData();
-  }, [url]);
+  }, [tableName, columns]);
 
   return { data, loading, error };
 };

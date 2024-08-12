@@ -1,29 +1,23 @@
+/* eslint-disable react/jsx-no-undef */
 import { Stack, TextField, Button, Box, Typography, InputAdornment } from '@mui/material';
-import { FcGoogle } from 'react-icons/fc';
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
 import { useEffect, useState } from 'react';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';  // Adjust the path based on your structure
 import { useNavigate } from 'react-router-dom';
 import Notification from './Notification';
 import { Link } from 'react-router-dom';
 
 const Signup = () => {
-    const {
-        user,
-        signUp,
-        googleSignIn,
-    } = useAuth();
+    const { user, signUp, googleSignIn } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(user){
+        if (user) {
             navigate('/');
         }
-    }
-    , [user, navigate]);
+    }, [user, navigate]);
 
-    // state variables
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -32,19 +26,9 @@ const Signup = () => {
     const [errorOpen, setErrorOpen] = useState(false);
     const [successOpen, setSuccessOpen] = useState(false);
 
-
-    const handleEmail = (e) => {
-        setEmail(e.target.value);
-    };
-
-    const handlePassword = (e) => {
-        setPassword(e.target.value);
-    };
-
-    const handleConfirmPassword = (e) => {
-        setConfirmPassword(e.target.value);
-    };
-
+    const handleEmail = (e) => setEmail(e.target.value);
+    const handlePassword = (e) => setPassword(e.target.value);
+    const handleConfirmPassword = (e) => setConfirmPassword(e.target.value);
     const resetForm = () => {
         setEmail('');
         setPassword('');
@@ -52,59 +36,36 @@ const Signup = () => {
     };
 
     const handleGoogleSignup = async () => {
-        try{
-            await googleSignIn();
+        const { error } = await googleSignIn();
+        if (error) {
+            setError(error.message);
+            setErrorOpen(true);
+        } else {
             setSuccess('Account created successfully');
             setSuccessOpen(true);
-
-        }
-        catch(err){
-            setError(err.message || 'Something went wrong');
-            setErrorOpen(true);
         }
     };
 
-            
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        if(password !== confirmPassword){
+        if (password !== confirmPassword) {
             setError("Passwords do not match");
             setErrorOpen(true);
             return;
         }
 
-        try{
-            // signup
-            await signUp(email, password);  
+        const { error } = await signUp(email, password);
+        if (error) {
+            setError(error.message);
+            setErrorOpen(true);
+        } else {
             setSuccess('Account created successfully');
             setSuccessOpen(true);
-
-            // Redirect to home page after 1s
             setTimeout(() => {
                 navigate('/');
-            }
-            , 1000);
-
+            }, 1000);
             resetForm();
         }
-        catch(err){
-            if(err.code === 'auth/email-already-in-use'){
-                setError('Email already in use');
-            }
-            else if(err.code === 'auth/invalid-email'){
-                setError('Invalid email, please try again');
-            }
-            else if(err.code === 'auth/weak-password'){
-                setError('Password must be at least 6 characters');
-            }
-            else{
-                setError(err.message || 'Something went wrong');
-            }
-            setErrorOpen(true);
-            resetForm();
-        }
-
     };
 
     return (
@@ -113,7 +74,7 @@ const Signup = () => {
             <Notification message={error} type="error" open={errorOpen} setOpen={setErrorOpen} />
             {/* Success */}
             <Notification message={success} type="success" open={successOpen} setOpen={setSuccessOpen} />
-            <Stack spacing={3} maxWidth="400px" width="100%" padding={4} component="form" sx={{ boxShadow: 3, borderRadius: 2, backgroundColor: 'white' }} >
+            <Stack spacing={3} maxWidth="400px" width="100%" padding={4} component="form" sx={{ boxShadow: 3, borderRadius: 2, backgroundColor: 'white' }}>
                 <Typography variant="h4" component="h1" gutterBottom>
                     Sign up
                 </Typography>
@@ -135,7 +96,6 @@ const Signup = () => {
                     }}
                     value={email}
                     onChange={handleEmail}
-
                 />
                 <TextField
                     margin="normal"
@@ -180,10 +140,9 @@ const Signup = () => {
                 <Button type="submit" fullWidth variant="contained" disableElevation onClick={handleSubmit}>
                     Submit
                 </Button>
-
                 <Typography variant="body2" color="text.secondary" align="center">
                     Already have an account?{' '}
-                    <Link to="/login" style={{ textDecoration: 'none' }} >
+                    <Link to="/login" style={{ textDecoration: 'none' }}>
                         Login
                     </Link>
                 </Typography>
@@ -194,7 +153,6 @@ const Signup = () => {
                     </Typography>
                     <Box sx={{ width: '100%', height: '1px', backgroundColor: 'black' }} />
                 </Stack>
-
                 <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
                     <Button variant="outlined" startIcon={<FcGoogle />} sx={{
                         flex: 1, color: 'black', borderColor: 'lightgray', '&:hover': {
@@ -207,6 +165,6 @@ const Signup = () => {
             </Stack>
         </Box>
     );
-};  
+};
 
 export default Signup;

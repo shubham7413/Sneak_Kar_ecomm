@@ -1,54 +1,45 @@
 import AuthContext from "../context/AuthContext";
 import { useEffect, useState } from "react";
-import {auth} from '../config/firebase';
-import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-
+import { supabase } from '../config/supabaseClient';
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     // On mount, subscribe to auth state change
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
+        const session = supabase.auth.session();
+        setUser(session?.user || null);
+
+        const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user || null);
         });
-        return () => unsubscribe(); // Cleanup subscription on unmount
-    }
-    , []);
+
+        return () => {
+            authListener?.unsubscribe();
+        };
+    }, []);
 
     // Auth functions
     const signUp = (email, password) => {
-        return createUserWithEmailAndPassword(auth, email, password);
+        return supabase.auth.signUp({ email, password });
     };
     
     const signIn = (email, password) => {
-        return signInWithEmailAndPassword(auth, email, password);
+        return supabase.auth.signIn({ email, password });
     };
     
     const logOut = () => {
-        return signOut(auth);
+        return supabase.auth.signOut();
     };
     
     const resetPassword = (email) => {
-        return sendPasswordResetEmail(auth, email);
+        return supabase.auth.api.resetPasswordForEmail(email);
     };
     
-    const verifyEmail = () => {
-        if(!user) return Promise.reject('No user found');
-        return sendEmailVerification(user);
-    };
-
-    const updateUser = (name, image) => {
-        if(!user) return Promise.reject('No user found');
-        return updateProfile(user, {displayName: name, photoURL: image});
-    };
-
     const googleSignIn = () => {
-        const provider = new GoogleAuthProvider();
-        return signInWithPopup(auth, provider);
+        return supabase.auth.signIn({ provider: 'google' });
     };
 
-  
     const value = {
         user,
         setUser,
@@ -56,17 +47,14 @@ const AuthProvider = ({ children }) => {
         signIn,
         logOut,
         resetPassword,
-        verifyEmail,
-        updateUser,
         googleSignIn,
     };
     
     return (
-        <AuthContext.Provider value = {value}>
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     );
-
 };
 
 export default AuthProvider;
